@@ -41,4 +41,9 @@ public class UserProfileController {
         userProfileService.uploadUserProfileImage(userProfileId, file);
     }
 
+    @GetMapping("/image/download/v1/{userProfileId}")
+    public byte[] downloadUserProfileImage(@PathVariable("userProfileId") UUID userProfileId) {
+        return userProfileService.downloadUserProfileImage(userProfileId);
+    }
+
 }

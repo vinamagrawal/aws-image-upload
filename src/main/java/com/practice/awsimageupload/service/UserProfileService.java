@@ -58,6 +58,18 @@ public class UserProfileService {
         }
     }
 
+    public byte[] downloadUserProfileImage(UUID userProfileId) {
+        UserProfile user = getUserProfileOrThrowException(userProfileId);
+        String path = String.format("%s/%s",
+                BucketName.PROFILE_IMAGE.getBucketName(),
+                user.getUserProfileId());
+        try {
+            return fileStore.download(path, user.getUserProfileImageURL());
+        } catch (IllegalStateException e) {
+            return new byte[0];
+        }
+    }
+
     private Map<String, String> extractMetaData(MultipartFile file) {
         Map<String, String> metaData = new HashMap<>();
         metaData.put("Content-Type", file.getContentType());
@@ -79,9 +91,7 @@ public class UserProfileService {
         if (!Arrays.asList(
                 IMAGE_JPEG.getMimeType(),
                 IMAGE_GIF.getMimeType(),
-                IMAGE_PNG.getMimeType()
-            ).contains(file.getContentType())
-        ) {
+                IMAGE_PNG.getMimeType()).contains(file.getContentType())) {
             throw new IllegalStateException("File must be an image - " + file.getContentType());
         }
     }
