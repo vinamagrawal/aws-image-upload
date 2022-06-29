@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.practice.awsimageupload.service.UserProfileService;
 
 @RestController
 @RequestMapping("/user-profile")
+@CrossOrigin("*")
 public class UserProfileController {
     
     private final UserProfileService userProfileService;

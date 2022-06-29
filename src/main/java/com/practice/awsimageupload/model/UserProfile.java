@@ -8,13 +8,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 public class UserProfile {
     
-    private UUID useProfileId;
-    private String username;
+    private final UUID userProfileId;
+    private final String username;
     private String userProfileImageURL; //S3 Key
 
 }
